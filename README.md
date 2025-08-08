@@ -18,7 +18,46 @@ pip install cargo-orchestrator
 
 ## Usage
 
-### Basic Example
+### Command-Line Interface
+
+The package includes a CLI tool that provides a quick way to analyze cargo build output:
+
+```bash
+# Basic usage - build current directory
+cargo-orchestrator
+
+# Show only error and warning counts
+cargo-orchestrator --quiet
+
+# Build a specific project
+cargo-orchestrator --root-dir /path/to/rust/project
+
+# Release build with features
+cargo-orchestrator --release --features async,serde
+
+# Output as JSON
+cargo-orchestrator --format json
+
+# Show detailed output
+cargo-orchestrator --verbose
+```
+
+CLI Options:
+- `--root-dir PATH`: Root directory for cargo to run in
+- `--manifest-path PATH`: Path to Cargo.toml
+- `--target TARGET`: Build for specific target triple
+- `--release`: Build in release mode
+- `--nightly`: Use nightly toolchain
+- `--features FEATURES`: Comma-separated list of features
+- `--all-features`: Enable all features
+- `--no-default-features`: Disable default features
+- `--package NAME`: Build specific package
+- `--workspace`: Build entire workspace
+- `--format {json,human,summary}`: Output format (default: summary)
+- `--verbose/-v`: Show detailed output
+- `--quiet/-q`: Only show error/warning counts
+
+### Python API - Basic Example
 
 ```python
 from cargo_orchestrator import CargoBuilder
