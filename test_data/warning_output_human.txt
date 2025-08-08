@@ -1,0 +1,87 @@
+warning: unnecessary parentheses around assigned value
+  --> src/main.rs:13:18
+   |
+13 |     let result = (5 + 3);
+   |                  ^     ^
+   |
+   = note: `#[warn(unused_parens)]` on by default
+help: remove these parentheses
+   |
+13 -     let result = (5 + 3);
+13 +     let result = 5 + 3;
+   |
+
+warning: unreachable statement
+  --> src/main.rs:18:5
+   |
+17 |     return;
+   |     ------ any code following this expression is unreachable
+18 |     println!("This will never print");
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unreachable statement
+   |
+   = note: `#[warn(unreachable_code)]` on by default
+   = note: this warning originates in the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unused variable: `unused_var`
+ --> src/main.rs:6:9
+  |
+6 |     let unused_var = 42;
+  |         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_unused_var`
+  |
+note: the lint level is defined here
+ --> src/main.rs:1:9
+  |
+1 | #![warn(unused_variables)]
+  |         ^^^^^^^^^^^^^^^^
+
+warning: variable `unused_mut` is assigned to, but never used
+ --> src/main.rs:9:13
+  |
+9 |     let mut unused_mut = 10;
+  |             ^^^^^^^^^^
+  |
+  = note: consider using `_unused_mut` instead
+
+warning: value assigned to `unused_mut` is never read
+  --> src/main.rs:10:5
+   |
+10 |     unused_mut = 20;
+   |     ^^^^^^^^^^
+   |
+   = help: maybe it is overwritten before being read?
+   = note: `#[warn(unused_assignments)]` on by default
+
+warning: function `dead_function` is never used
+  --> src/main.rs:22:4
+   |
+22 | fn dead_function() {
+   |    ^^^^^^^^^^^^^
+   |
+note: the lint level is defined here
+  --> src/main.rs:2:9
+   |
+2  | #![warn(dead_code)]
+   |         ^^^^^^^^^
+
+warning: function `function_with_unused_param` is never used
+  --> src/main.rs:27:4
+   |
+27 | fn function_with_unused_param(x: i32, _y: i32) -> i32 {
+   |    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `CamelCaseFunction` is never used
+  --> src/main.rs:32:4
+   |
+32 | fn CamelCaseFunction() {
+   |    ^^^^^^^^^^^^^^^^^
+
+warning: function `CamelCaseFunction` should have a snake case name
+  --> src/main.rs:32:4
+   |
+32 | fn CamelCaseFunction() {
+   |    ^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `camel_case_function`
+   |
+   = note: `#[warn(non_snake_case)]` on by default
+
+warning: `warning_project` (bin "warning_project") generated 9 warnings (run `cargo fix --bin "warning_project"` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s

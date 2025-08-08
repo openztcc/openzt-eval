@@ -1,0 +1,36 @@
+   Compiling error_project v0.1.0 (/home/finn/Projects/cargo-orchestrator/test_projects/error_project)
+error: expected `;`, found keyword `let`
+  --> src/main.rs:12:15
+   |
+12 |     let z = 42
+   |               ^ help: add `;` here
+...
+15 |     let mut s = String::from("hello");
+   |     --- unexpected token
+
+error[E0425]: cannot find value `x` in this scope
+ --> src/main.rs:3:32
+  |
+3 |     println!("Value of x: {}", x);
+  |                                ^ not found in this scope
+
+error[E0308]: mismatched types
+ --> src/main.rs:6:18
+  |
+6 |     let y: i32 = "not a number";
+  |            ---   ^^^^^^^^^^^^^^ expected `i32`, found `&str`
+  |            |
+  |            expected due to this
+
+error[E0425]: cannot find function `undefined_function` in this scope
+  --> src/main.rs:9:5
+   |
+9  |     undefined_function();
+   |     ^^^^^^^^^^^^^^^^^^ help: a function with a similar name exists: `unused_function`
+...
+21 | fn unused_function() {
+   | -------------------- similarly named function `unused_function` defined here
+
+Some errors have detailed explanations: E0308, E0425.
+For more information about an error, try `rustc --explain E0308`.
+error: could not compile `error_project` (bin "error_project") due to 4 previous errors
