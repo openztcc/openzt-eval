@@ -8,8 +8,8 @@ import sys
 from pathlib import Path
 from typing import List, Optional
 
-from .builder import CargoBuilder, BuildProfile
-from .parser import MessageLevel
+from builder import CargoBuilder, BuildProfile
+from parser import MessageLevel
 
 
 def parse_arguments() -> argparse.Namespace:
