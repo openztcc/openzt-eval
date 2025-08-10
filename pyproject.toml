@@ -1,24 +1,8 @@
-[project]
-name = "cargo-orchestrator"
-version = "0.1.0"
-description = "A Python library for running cargo build and parsing its output"
-readme = "README.md"
-requires-python = ">=3.10"
-dependencies = []
+[tool.uv.workspace]
+members = ["packages/*", "apps/*"]
 
-[project.scripts]
-cargo-orchestrator = "cargo_orchestrator.cli:main"
-
-[project.optional-dependencies]
-dev = [
+[tool.uv]
+dev-dependencies = [
     "pytest>=7.0",
     "pytest-cov>=4.0",
 ]
-
-[build-system]
-requires = ["setuptools>=45", "wheel"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools]
-py-modules = []
-
