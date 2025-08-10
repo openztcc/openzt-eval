@@ -60,6 +60,12 @@ Examples:
         help="Use nightly toolchain"
     )
     
+    parser.add_argument(
+        "--clippy",
+        action="store_true",
+        help="Run cargo clippy for linting instead of cargo build"
+    )
+    
     # Feature flags
     parser.add_argument(
         "--features",
@@ -158,13 +164,16 @@ def print_summary(result, args):
         return
     
     # Header
-    print_colored("\n═══ Cargo Build Summary ═══\n", bold=True)
+    tool_name = "Clippy" if args.clippy else "Build"
+    print_colored(f"\n═══ Cargo {tool_name} Summary ═══\n", bold=True)
     
     # Status
     if result.success:
-        print_colored("✓ Build succeeded", "green", bold=True)
+        status_msg = "✓ Clippy passed" if args.clippy else "✓ Build succeeded"
+        print_colored(status_msg, "green", bold=True)
     else:
-        print_colored("✗ Build failed", "red", bold=True)
+        status_msg = "✗ Clippy failed" if args.clippy else "✗ Build failed"
+        print_colored(status_msg, "red", bold=True)
     
     # Statistics
     print(f"\nStatistics:")
@@ -254,7 +263,7 @@ def main():
     if args.features:
         features = [f.strip() for f in args.features.split(",")]
     
-    # Run build
+    # Run build or clippy
     try:
         result = builder.build(
             features=features,
@@ -262,10 +271,12 @@ def main():
             no_default_features=args.no_default_features,
             package=args.package,
             workspace=args.workspace,
-            message_format="json" if args.format != "human" else "human"
+            message_format="json" if args.format != "human" else "human",
+            use_clippy=args.clippy
         )
     except Exception as e:
-        print_colored(f"Error running cargo build: {e}", "red")
+        command = "cargo clippy" if args.clippy else "cargo build"
+        print_colored(f"Error running {command}: {e}", "red")
         sys.exit(1)
     
     # Display results based on format

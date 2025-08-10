@@ -5,10 +5,11 @@ A Python library for running `cargo build` commands and parsing the resulting er
 ## Features
 
 - Run cargo build with various configuration options
+- Run cargo clippy for linting analysis
 - Parse both JSON and human-readable output formats
 - Support for release/debug builds, nightly toolchain, custom targets
 - Extract and structure error messages, warnings, and their locations
-- Easy-to-use Python API
+- Easy-to-use Python API and CLI tool
 
 ## Installation
 
@@ -40,6 +41,12 @@ cargo-orchestrator --format json
 
 # Show detailed output
 cargo-orchestrator --verbose
+
+# Run clippy instead of build
+cargo-orchestrator --clippy
+
+# Run clippy on a specific project
+cargo-orchestrator --root-dir /path/to/project --clippy --quiet
 ```
 
 CLI Options:
@@ -48,6 +55,7 @@ CLI Options:
 - `--target TARGET`: Build for specific target triple
 - `--release`: Build in release mode
 - `--nightly`: Use nightly toolchain
+- `--clippy`: Run cargo clippy instead of cargo build
 - `--features FEATURES`: Comma-separated list of features
 - `--all-features`: Enable all features
 - `--no-default-features`: Disable default features
@@ -103,6 +111,27 @@ result = builder.build(
     no_default_features=True,
     package="my-crate"
 )
+```
+
+### Running Clippy
+
+Run cargo clippy for linting:
+
+```python
+# Run clippy with default settings
+result = builder.clippy()
+
+# Run clippy with specific configuration
+result = builder.clippy(
+    features=["async"],
+    all_features=False,
+    workspace=True
+)
+
+# Check for clippy-specific warnings
+clippy_warnings = [m for m in result.messages if "clippy::" in (m.code or "")]
+for warning in clippy_warnings:
+    print(f"Clippy: [{warning.code}] {warning.message}")
 ```
 
 ### Parsing Output

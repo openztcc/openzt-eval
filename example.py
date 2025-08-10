@@ -88,10 +88,20 @@ def main():
     print(f"   Errors: {sum(1 for m in result.messages if m.level == MessageLevel.ERROR)}")
     print(f"   Warnings: {sum(1 for m in result.messages if m.level == MessageLevel.WARNING)}")
     
-    # Show raw output sample
-    if result.stderr:
-        print("\n   Raw stderr (first 500 chars):")
-        print(f"   {result.stderr[:500]}...")
+    # Example 6: Run clippy for linting
+    print("\n6. Clippy linting:")
+    builder = CargoBuilder(
+        root_dir=Path("test_projects/clippy_project") if Path("test_projects/clippy_project").exists() else None
+    )
+    result = builder.clippy()
+    
+    print(f"   Result: {'Passed' if result.success else 'Failed'}")
+    print(f"   Clippy warnings: {sum(1 for m in result.messages if m.level == MessageLevel.WARNING)}")
+    
+    # Show first few clippy warnings
+    clippy_warnings = [m for m in result.messages if "clippy::" in (m.code or "")][:3]
+    for warn in clippy_warnings:
+        print(f"   - [{warn.code}] {warn.message[:50]}...")
 
 
 if __name__ == "__main__":

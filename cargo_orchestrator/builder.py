@@ -60,9 +60,10 @@ class CargoBuilder:
         workspace: bool = False,
         message_format: str = "json",
         extra_args: Optional[List[str]] = None,
+        use_clippy: bool = False,
     ) -> BuildResult:
         """
-        Run cargo build with the specified options.
+        Run cargo build or cargo clippy with the specified options.
         
         Args:
             features: List of features to enable.
@@ -72,6 +73,7 @@ class CargoBuilder:
             workspace: Build all packages in the workspace.
             message_format: Output format ('json' or 'human').
             extra_args: Additional arguments to pass to cargo build.
+            use_clippy: Run cargo clippy instead of cargo build for linting.
             
         Returns:
             BuildResult containing success status, parsed messages, and raw output.
@@ -84,6 +86,7 @@ class CargoBuilder:
             workspace=workspace,
             message_format=message_format,
             extra_args=extra_args,
+            use_clippy=use_clippy,
         )
         
         try:
@@ -122,6 +125,44 @@ class CargoBuilder:
                 return_code=-1,
             )
     
+    def clippy(
+        self,
+        features: Optional[List[str]] = None,
+        all_features: bool = False,
+        no_default_features: bool = False,
+        package: Optional[str] = None,
+        workspace: bool = False,
+        message_format: str = "json",
+        extra_args: Optional[List[str]] = None,
+    ) -> BuildResult:
+        """
+        Run cargo clippy with the specified options.
+        
+        This is a convenience method that calls build() with use_clippy=True.
+        
+        Args:
+            features: List of features to enable.
+            all_features: Enable all features.
+            no_default_features: Disable default features.
+            package: Specific package to lint in a workspace.
+            workspace: Lint all packages in the workspace.
+            message_format: Output format ('json' or 'human').
+            extra_args: Additional arguments to pass to cargo clippy.
+            
+        Returns:
+            BuildResult containing success status, parsed messages, and raw output.
+        """
+        return self.build(
+            features=features,
+            all_features=all_features,
+            no_default_features=no_default_features,
+            package=package,
+            workspace=workspace,
+            message_format=message_format,
+            extra_args=extra_args,
+            use_clippy=True,
+        )
+    
     def _build_command(
         self,
         features: Optional[List[str]] = None,
@@ -131,13 +172,20 @@ class CargoBuilder:
         workspace: bool = False,
         message_format: str = "json",
         extra_args: Optional[List[str]] = None,
+        use_clippy: bool = False,
     ) -> List[str]:
         """Build the cargo command with all specified options."""
         # Start with cargo or cargo +nightly
         if self.use_nightly:
-            cmd = ["cargo", "+nightly", "build"]
+            if use_clippy:
+                cmd = ["cargo", "+nightly", "clippy"]
+            else:
+                cmd = ["cargo", "+nightly", "build"]
         else:
-            cmd = ["cargo", "build"]
+            if use_clippy:
+                cmd = ["cargo", "clippy"]
+            else:
+                cmd = ["cargo", "build"]
         
         # Add manifest path if specified
         if self.manifest_path:
