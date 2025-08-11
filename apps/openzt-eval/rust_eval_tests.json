@@ -1,0 +1,75 @@
+[
+  {
+    "name": "fibonacci_implementation",
+    "prompt": "Implement an iterative Rust function that calculates the nth Fibonacci number. The function should have the signature `fn fibonacci(n: u32) -> u64` and handle edge cases properly.",
+    "expected": "{\"repo_url\": \"https://github.com/rust-lang/rust-clippy\", \"tag_or_branch\": \"master\", \"file_path\": \"tests/ui/fibonacci.rs\", \"replacement_target\": \"// TODO: implement fibonacci function\", \"description\": \"Iterative Fibonacci implementation test\"}",
+    "metadata": {
+      "category": "algorithms",
+      "difficulty": "easy",
+      "expected_errors": 0,
+      "expected_warnings": 0,
+      "time_limit": 5
+    }
+  },
+  {
+    "name": "stack_data_structure",
+    "prompt": "Complete the implementation of a generic Stack data structure in Rust with the following methods:\n\n```rust\nstruct Stack<T> {\n    items: Vec<T>,\n}\n\nimpl<T> Stack<T> {\n    fn new() -> Self { /* TODO */ }\n    fn push(&mut self, item: T) { /* TODO */ }\n    fn pop(&mut self) -> Option<T> { /* TODO */ }\n    fn is_empty(&self) -> bool { /* TODO */ }\n}\n```\n\nEnsure the implementation is efficient and follows Rust best practices.",
+    "expected": "{\"repo_url\": \"https://github.com/rust-lang/rust\", \"tag_or_branch\": \"master\", \"file_path\": \"library/std/src/collections/mod.rs\", \"replacement_target\": \"// TODO: implement stack methods\", \"description\": \"Generic stack data structure implementation\"}",
+    "metadata": {
+      "category": "data_structures",
+      "difficulty": "medium",
+      "expected_errors": 0,
+      "expected_warnings": 0,
+      "time_limit": 10
+    }
+  },
+  {
+    "name": "error_handling_division",
+    "prompt": "Implement a safe integer division function in Rust that properly handles division by zero and integer overflow:\n\n```rust\nfn safe_divide(dividend: i32, divisor: i32) -> Result<i32, DivisionError>\n```\n\nDefine an appropriate error type and implement proper error handling for all edge cases.",
+    "expected": "{\"repo_url\": \"https://github.com/rust-lang/rust\", \"tag_or_branch\": \"master\", \"file_path\": \"library/core/src/ops/arith.rs\", \"replacement_target\": \"// TODO: implement safe division\", \"description\": \"Safe division with comprehensive error handling\"}",
+    "metadata": {
+      "category": "error_handling",
+      "difficulty": "medium",
+      "expected_errors": 0,
+      "expected_warnings": 0,
+      "time_limit": 8
+    }
+  },
+  {
+    "name": "async_file_reader",
+    "prompt": "Implement an async function that reads a file and returns its contents as a String, with proper error handling:\n\n```rust\nasync fn read_file_async(path: &Path) -> Result<String, std::io::Error>\n```\n\nUse tokio's async file operations and handle all potential I/O errors gracefully.",
+    "expected": "{\"repo_url\": \"https://github.com/tokio-rs/tokio\", \"tag_or_branch\": \"master\", \"file_path\": \"tokio/src/fs/file.rs\", \"replacement_target\": \"// TODO: implement async file reading\", \"description\": \"Async file reading with error handling\"}",
+    "metadata": {
+      "category": "async_programming",
+      "difficulty": "hard",
+      "expected_errors": 0,
+      "expected_warnings": 0,
+      "time_limit": 15,
+      "requires_tokio": true
+    }
+  },
+  {
+    "name": "trait_implementation",
+    "prompt": "Implement the Display trait for a custom struct Person:\n\n```rust\nstruct Person {\n    name: String,\n    age: u32,\n    email: String,\n}\n\nimpl Display for Person {\n    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        // TODO: implement Display\n    }\n}\n```\n\nFormat the output as \"Name: John (30) - john@example.com\"",
+    "expected": "{\"repo_url\": \"https://github.com/rust-lang/rust\", \"tag_or_branch\": \"master\", \"file_path\": \"library/core/src/fmt/mod.rs\", \"replacement_target\": \"// TODO: implement Display trait\", \"description\": \"Custom Display trait implementation\"}",
+    "metadata": {
+      "category": "traits",
+      "difficulty": "easy",
+      "expected_errors": 0,
+      "expected_warnings": 0,
+      "time_limit": 5
+    }
+  },
+  {
+    "name": "ownership_string_manipulation",
+    "prompt": "Implement a function that takes ownership of a String, reverses it, and returns the reversed String:\n\n```rust\nfn reverse_string(s: String) -> String {\n    // TODO: implement string reversal with proper ownership\n}\n```\n\nEnsure the implementation follows Rust ownership principles and is efficient.",
+    "expected": "{\"repo_url\": \"https://github.com/rust-lang/rust\", \"tag_or_branch\": \"master\", \"file_path\": \"library/alloc/src/string.rs\", \"replacement_target\": \"// TODO: implement string reversal\", \"description\": \"String reversal demonstrating ownership\"}",
+    "metadata": {
+      "category": "ownership",
+      "difficulty": "medium", 
+      "expected_errors": 0,
+      "expected_warnings": 0,
+      "time_limit": 7
+    }
+  }
+]

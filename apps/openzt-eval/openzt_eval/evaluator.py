@@ -22,7 +22,7 @@ except ImportError:
     AUTOEVALS_AVAILABLE = False
 
 from .models import ModelLoader, ModelConfig
-from .scorers import BaseScorer, BasicResponseScorer, ScorerResult
+from .scorers import BaseScorer, BasicResponseScorer, RustBuildScorer, ScorerResult
 
 logger = logging.getLogger(__name__)
 

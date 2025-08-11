@@ -14,7 +14,7 @@ from rich.logging import RichHandler
 
 from .models import ModelLoader, ModelConfig, ModelType
 from .evaluator import Evaluator, EvalCase
-from .scorers import BasicResponseScorer, LengthScorer, ContainsScorer
+from .scorers import BasicResponseScorer, LengthScorer, ContainsScorer, RustBuildScorer
 
 console = Console()
 
@@ -175,6 +175,14 @@ async def run_evaluation(args):
     scorers = [BasicResponseScorer(min_length=args.min_response_length)]
     if args.check_length:
         scorers.append(LengthScorer(min_length=10, max_length=1000))
+    if args.rust_build:
+        scorers.append(RustBuildScorer(
+            use_clippy=args.rust_clippy,
+            allow_warnings=not args.rust_strict,
+            error_penalty=1.0,
+            warning_penalty=0.1,
+            clippy_penalty=0.05
+        ))
     console.print(f"[cyan]Using {len(scorers)} scorer(s)[/cyan]")
     
     # Create evaluator
@@ -292,6 +300,24 @@ Examples:
         "--check-length",
         action="store_true",
         help="Add length scorer to check response lengths"
+    )
+    
+    parser.add_argument(
+        "--rust-build",
+        action="store_true",
+        help="Enable Rust build scorer for code generation evaluation"
+    )
+    
+    parser.add_argument(
+        "--rust-clippy",
+        action="store_true",
+        help="Enable clippy checks in Rust build scorer (requires --rust-build)"
+    )
+    
+    parser.add_argument(
+        "--rust-strict",
+        action="store_true", 
+        help="Fail Rust build scorer on warnings (requires --rust-build)"
     )
     
     parser.add_argument(

@@ -607,6 +607,8 @@ source = { editable = "apps/openzt-eval" }
 dependencies = [
     { name = "autoevals" },
     { name = "braintrust" },
+    { name = "cargo-orchestrator" },
+    { name = "gitpython" },
     { name = "httpx" },
     { name = "lmstudio" },
     { name = "openai" },
@@ -618,6 +620,8 @@ dependencies = [
 requires-dist = [
     { name = "autoevals" },
     { name = "braintrust" },
+    { name = "cargo-orchestrator", editable = "packages/cargo-orchestrator" },
+    { name = "gitpython" },
     { name = "httpx" },
     { name = "lmstudio" },
     { name = "openai" },

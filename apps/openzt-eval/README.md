@@ -1,14 +1,16 @@
 # openzt-eval
 
-Model evaluation tool for testing LLMs with braintrust and autoevals.
+Model evaluation tool for testing LLMs with braintrust and autoevals, featuring advanced code generation evaluation.
 
 ## Features
 - Support for local models via lmstudio
 - Support for remote models through OpenAI-compatible APIs
 - Braintrust proxy support for unified access to multiple model providers
 - Autoevals integration for advanced scoring
+- **Rust Build Scorer**: Evaluate code generation by compiling and testing in real projects
 - Configurable test suites with expected outputs
 - Async evaluation with detailed metrics
+- Comprehensive scoring with build errors, warnings, and clippy lints
 
 ## Setup
 
@@ -69,6 +71,49 @@ Run with custom tests:
 openzt-eval --models model:type --test-file tests.json
 ```
 
+## Rust Build Scorer
+
+The `RustBuildScorer` evaluates LLM-generated code by substituting it into real Rust projects and analyzing compilation results.
+
+### Features
+
+- **Compilation Testing**: Real cargo build execution
+- **Clippy Integration**: Advanced linting analysis
+- **Configurable Scoring**: Penalties for errors, warnings, lints
+- **Repository Cloning**: Automatic setup of test environments
+- **Detailed Metadata**: Comprehensive build information
+
+### Usage
+
+```bash
+# Enable Rust build evaluation
+openzt-eval --models gpt4:openai --rust-build --test-file rust_tests.json
+
+# With clippy and strict mode (fail on warnings)
+openzt-eval --models local:local --rust-build --rust-clippy --rust-strict
+```
+
+### Test Case Format
+
+```json
+[
+  {
+    "name": "fibonacci_impl",
+    "prompt": "Implement an iterative fibonacci function in Rust...",
+    "expected": "{\"repo_url\": \"https://github.com/user/repo\", \"tag_or_branch\": \"main\", \"file_path\": \"src/lib.rs\", \"replacement_target\": \"// TODO: implement fibonacci\", \"description\": \"Fibonacci implementation\"}",
+    "metadata": {"category": "algorithms", "difficulty": "easy"}
+  }
+]
+```
+
+### Scoring
+
+- **Score Range**: 0.0 to 1.0
+- **Error Penalty**: 1.0 per compilation error (default)
+- **Warning Penalty**: 0.1 per warning (default)
+- **Clippy Penalty**: 0.05 per clippy lint (default)
+- **Pass Condition**: Build succeeds + (warnings allowed OR no warnings)
+
 ### Options
 
 - `--test-file`: JSON file with test cases
@@ -77,4 +122,7 @@ openzt-eval --models model:type --test-file tests.json
 - `--no-braintrust`: Disable Braintrust integration
 - `--no-autoevals`: Disable autoevals scorers
 - `--check-length`: Add length validation
+- `--rust-build`: Enable Rust build scorer
+- `--rust-clippy`: Enable clippy checks (requires --rust-build)
+- `--rust-strict`: Fail on warnings (requires --rust-build)
 - `--verbose`: Enable detailed logging
