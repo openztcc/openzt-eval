@@ -1,0 +1,122 @@
+[
+  {
+    "model": "test_gpt",
+    "case": "simple_greeting",
+    "prompt": "Say hello in a friendly way.",
+    "response": "[STUB RESPONSE from test_gpt (openai)]",
+    "scores": {
+      "basic_response": 1.0
+    },
+    "passed": true,
+    "duration_ms": 0.003412947990000248,
+    "timestamp": "2025-08-11T16:45:24.525309"
+  },
+  {
+    "model": "test_gpt",
+    "case": "basic_math",
+    "prompt": "What is 2 + 2?",
+    "response": "[STUB RESPONSE from test_gpt (openai)]",
+    "scores": {
+      "basic_response": 1.0
+    },
+    "passed": true,
+    "duration_ms": 0.0039549777284264565,
+    "timestamp": "2025-08-11T16:45:24.527527"
+  },
+  {
+    "model": "test_gpt",
+    "case": "explain_concept",
+    "prompt": "Explain what machine learning is in one sentence.",
+    "response": "[STUB RESPONSE from test_gpt (openai)]",
+    "scores": {
+      "basic_response": 1.0
+    },
+    "passed": true,
+    "duration_ms": 0.0024819746613502502,
+    "timestamp": "2025-08-11T16:45:24.529656"
+  },
+  {
+    "model": "test_gpt",
+    "case": "creative_writing",
+    "prompt": "Write a haiku about programming.",
+    "response": "[STUB RESPONSE from test_gpt (openai)]",
+    "scores": {
+      "basic_response": 1.0
+    },
+    "passed": true,
+    "duration_ms": 0.003516965080052614,
+    "timestamp": "2025-08-11T16:45:24.531902"
+  },
+  {
+    "model": "test_gpt",
+    "case": "factual_question",
+    "prompt": "What is the capital of France?",
+    "response": "[STUB RESPONSE from test_gpt (openai)]",
+    "scores": {
+      "basic_response": 1.0
+    },
+    "passed": true,
+    "duration_ms": 0.03130303230136633,
+    "timestamp": "2025-08-11T16:45:24.534292"
+  },
+  {
+    "model": "test_claude",
+    "case": "simple_greeting",
+    "prompt": "Say hello in a friendly way.",
+    "response": "[STUB RESPONSE from test_claude (anthropic)]",
+    "scores": {
+      "basic_response": 1.0
+    },
+    "passed": true,
+    "duration_ms": 0.003604975063353777,
+    "timestamp": "2025-08-11T16:45:24.537438"
+  },
+  {
+    "model": "test_claude",
+    "case": "basic_math",
+    "prompt": "What is 2 + 2?",
+    "response": "[STUB RESPONSE from test_claude (anthropic)]",
+    "scores": {
+      "basic_response": 1.0
+    },
+    "passed": true,
+    "duration_ms": 0.002662010956555605,
+    "timestamp": "2025-08-11T16:45:24.539538"
+  },
+  {
+    "model": "test_claude",
+    "case": "explain_concept",
+    "prompt": "Explain what machine learning is in one sentence.",
+    "response": "[STUB RESPONSE from test_claude (anthropic)]",
+    "scores": {
+      "basic_response": 1.0
+    },
+    "passed": true,
+    "duration_ms": 0.004702014848589897,
+    "timestamp": "2025-08-11T16:45:24.541729"
+  },
+  {
+    "model": "test_claude",
+    "case": "creative_writing",
+    "prompt": "Write a haiku about programming.",
+    "response": "[STUB RESPONSE from test_claude (anthropic)]",
+    "scores": {
+      "basic_response": 1.0
+    },
+    "passed": true,
+    "duration_ms": 0.0034460099413990974,
+    "timestamp": "2025-08-11T16:45:24.544011"
+  },
+  {
+    "model": "test_claude",
+    "case": "factual_question",
+    "prompt": "What is the capital of France?",
+    "response": "[STUB RESPONSE from test_claude (anthropic)]",
+    "scores": {
+      "basic_response": 1.0
+    },
+    "passed": true,
+    "duration_ms": 0.002738961484283209,
+    "timestamp": "2025-08-11T16:45:24.546113"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "name": "greeting",
+    "prompt": "Hello! How are you today?",
+    "metadata": {"category": "conversation"}
+  },
+  {
+    "name": "simple_math",
+    "prompt": "Calculate: 15 + 27",
+    "expected": "42",
+    "metadata": {"category": "math"}
+  },
+  {
+    "name": "code_generation",
+    "prompt": "Write a Python function that returns the sum of two numbers.",
+    "metadata": {"category": "coding"}
+  },
+  {
+    "name": "explanation",
+    "prompt": "Explain the concept of recursion in programming in simple terms.",
+    "metadata": {"category": "explanation"}
+  },
+  {
+    "name": "creative",
+    "prompt": "Write a short poem about artificial intelligence.",
+    "metadata": {"category": "creative"}
+  }
+]
